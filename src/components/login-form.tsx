@@ -1,5 +1,6 @@
 "use client";
 import { signinWithGoogle } from "@/lib/actions";
+import Link from "next/link";
 
 const LoginForm = () => {
     return (
@@ -7,6 +8,18 @@ const LoginForm = () => {
             <h1 className="mb-10 text-2xl font-semibold tracking-tight text-center text-gray-900">
                 Linkly
             </h1>
+            <div className="text-md-normal mb-6 text-center text-gray-700">
+                <div>
+                    New to Linkly?{" "}
+                    <Link
+                        className="text-gray-900"
+                        role="button"
+                        href="/sign-up"
+                    >
+                        Sign up.
+                    </Link>
+                </div>
+            </div>
             <form className="flex flex-col gap-2">
                 <button
                     className="w-full max-w-sm border border-gray-300 rounded-lg p-2 flex items-center justify-center gap-3 bg-white cursor-pointer hover:bg-gray-50 transition"

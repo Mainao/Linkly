@@ -5,7 +5,6 @@ export async function middleware(request: NextRequest) {
     let supabaseResponse = NextResponse.next({
         request,
     });
-    console.log("MIDDLEWARE RUNNING:", request.nextUrl.pathname);
     const supabase = createServerClient(
         process.env.NEXT_PUBLIC_SUPABASE_URL!,
         process.env.NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY!,

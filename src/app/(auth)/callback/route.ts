@@ -1,34 +1,57 @@
 import { NextResponse } from "next/server";
-// The client you created from the Server-Side Auth instructions
 import { createClient } from "@/lib/supabase/server";
 
 export async function GET(request: Request) {
     const { searchParams, origin } = new URL(request.url);
+
     const code = searchParams.get("code");
-    // if "next" is in param, use it as the redirect URL
+    const username = searchParams.get("username");
     let next = searchParams.get("next") ?? "/";
     if (!next.startsWith("/")) {
         // if "next" is not a relative URL, use the default
         next = "/";
     }
 
-    if (code) {
-        const supabase = await createClient();
-        const { error } = await supabase.auth.exchangeCodeForSession(code);
-        if (!error) {
-            const forwardedHost = request.headers.get("x-forwarded-host"); // original origin before load balancer
-            const isLocalEnv = process.env.NODE_ENV === "development";
-            if (isLocalEnv) {
-                // we can be sure that there is no load balancer in between, so no need to watch for X-Forwarded-Host
-                return NextResponse.redirect(`${origin}${next}`);
-            } else if (forwardedHost) {
-                return NextResponse.redirect(`https://${forwardedHost}${next}`);
-            } else {
-                return NextResponse.redirect(`${origin}${next}`);
-            }
-        }
+    if (!code) {
+        return NextResponse.redirect(`${origin}/auth/error`);
     }
 
-    // return the user to an error page with instructions
-    return NextResponse.redirect(`${origin}/auth/auth-code-error`);
+    const supabase = await createClient();
+
+    // Exchange code for session
+    const { error: sessionError } = await supabase.auth.exchangeCodeForSession(
+        code
+    );
+
+    if (sessionError) {
+        return NextResponse.redirect(`${origin}/auth/error`);
+    }
+
+    // Get the logged-in user
+    const {
+        data: { user },
+    } = await supabase.auth.getUser();
+
+    console.log("🔍 user =", user);
+
+    if (!user) {
+        return NextResponse.redirect(`${origin}/auth/error`);
+    }
+
+    const { data: profile, error: profileError } = await supabase
+        .from("profiles")
+        .select("username")
+        .eq("id", user.id)
+        .single();
+
+    if ((!profile || !profile.username) && username) {
+        const { error: insertError } = await supabase.from("profiles").upsert({
+            id: user.id,
+            username,
+        });
+    } else {
+        console.log("➡️ Existing user — no insert needed");
+    }
+
+    return NextResponse.redirect(`${origin}${next}`);
 }

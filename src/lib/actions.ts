@@ -4,30 +4,26 @@ import { createClient } from "@/lib/supabase/server";
 import { redirect } from "next/navigation";
 import type { Provider } from "@supabase/auth-js";
 
-const signInWith = (provider: Provider) => async () => {
+const signInWith = (provider: Provider) => async (formData?: FormData) => {
     const supabase = await createClient();
 
-    const auth_callback_url = `${process.env.APP_BASE_URL}/callback`;
+    const username = formData?.get("username")?.toString();
+
+    let callbackUrl = `${process.env.APP_BASE_URL}/callback`;
+
+    if (username) {
+        callbackUrl += `?username=${encodeURIComponent(username)}`;
+    }
+
+    console.log("👉 callbackUrl=", callbackUrl);
 
     const { data, error } = await supabase.auth.signInWithOAuth({
         provider,
-        options: {
-            redirectTo: auth_callback_url,
-        },
+        options: { redirectTo: callbackUrl },
     });
 
-    console.log(data);
-
-    if (error) {
-        console.log(error);
-    }
-
-    if (data && typeof data.url === "string") {
-        redirect(data.url);
-    } else {
-        // Fallback to sign-in page if redirect URL is missing
-        redirect("/sign-in");
-    }
+    if (data?.url) redirect(data.url);
+    redirect("/sign-in");
 };
 
 const signinWithGoogle = signInWith("google");
