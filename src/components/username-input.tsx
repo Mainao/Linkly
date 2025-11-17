@@ -47,12 +47,10 @@ export default function UsernameInput({
 
     return (
         <div className="space-y-2">
-            <label className="text-slate-900 text-sm font-medium mb-2 block">
-                Choose a username
-            </label>
             <div className="mt-1">
                 <input
-                    className="block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 dark:bg-gray-800 dark:border-gray-600 dark:text-white dark:placeholder-gray-300 dark:focus:border-indigo-400 dark:focus:ring-indigo-400 sm:text-sm"
+                    placeholder="Choose a username"
+                    className="block h-10 w-full rounded-md border border-gray-300 border-input bg-transparent px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
                     value={username}
                     onChange={(e) => setUsername(e.target.value.toLowerCase())}
                 />

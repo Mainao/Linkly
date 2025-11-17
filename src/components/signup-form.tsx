@@ -45,7 +45,7 @@ const SignupForm = () => {
 
                     <button
                         onClick={handleNext}
-                        className="mt-6 w-full rounded-md border border-transparent bg-indigo-600 px-4 py-2 text-sm font-medium text-white cursor-pointer hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 dark:bg-indigo-700 dark:border-transparent dark:hover:bg-indigo-600 dark:focus:ring-indigo-400 dark:focus:ring-offset-2 disabled:bg-gray-400 disabled:pointer-events-none"
+                        className="mt-6 h-10 w-full rounded-md border border-transparent bg-indigo-600 px-4 py-2 text-sm font-medium text-white cursor-pointer hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 dark:bg-indigo-700 dark:border-transparent dark:hover:bg-indigo-600 dark:focus:ring-indigo-400 dark:focus:ring-offset-2 disabled:bg-gray-400 disabled:pointer-events-none"
                         disabled={loading || !username || !available}
                     >
                         {loading ? <LoadingEllipsis /> : "Next"}
