@@ -9,7 +9,7 @@ export default async function SignInPage() {
     const session = await supabase.auth.getUser();
 
     if (session.data.user) {
-        return redirect("/account/home");
+        return redirect("/onboarding");
     }
 
     return <LoginForm />;
