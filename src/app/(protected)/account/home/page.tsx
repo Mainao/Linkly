@@ -1,3 +1,5 @@
-export default function Home() {
-    return <p>Home</p>;
+import { EditorPage } from "@/features/editor";
+
+export default function HomePage() {
+    return <EditorPage />;
 }
