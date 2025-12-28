@@ -1,11 +1,12 @@
 "use client";
-import { useState } from "react";
-import UsernameInput from "./username-input";
-import { signinWithGoogle } from "@/lib/actions";
-import Link from "next/link";
-import LoadingEllipsis from "./loading-ellipsis";
 
-const SignupForm = () => {
+import { useState } from "react";
+import Link from "next/link";
+import { signinWithGoogle } from "@/lib/actions";
+import { UsernameInput } from "./username-input";
+import { LoadingEllipsis } from "./loading-ellipsis";
+
+export function SignupForm() {
     const [username, setUsername] = useState("");
     const [nextClicked, setNextClicked] = useState(false);
     const [loading, setLoading] = useState(false);
@@ -98,6 +99,4 @@ const SignupForm = () => {
             </div>
         </div>
     );
-};
-
-export default SignupForm;
+}

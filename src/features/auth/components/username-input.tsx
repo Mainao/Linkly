@@ -12,7 +12,7 @@ type Props = {
     setAvailable: (b: boolean | null) => void;
 };
 
-export default function UsernameInput({
+export function UsernameInput({
     username,
     setUsername,
     loading,

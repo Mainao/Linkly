@@ -6,11 +6,7 @@ interface LinkInputProps {
     onFocus?: () => void;
 }
 
-export default function LinkInput({
-    value,
-    onChange,
-    onFocus,
-}: LinkInputProps) {
+export function LinkInput({ value, onChange, onFocus }: LinkInputProps) {
     return (
         <input
             type="url"

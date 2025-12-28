@@ -1,17 +1,13 @@
 import Image from "next/image";
+import type { LinkPreviewData } from "../types";
 
-type LinkPreview = {
-    favicon?: string;
-    title?: string | undefined;
-};
-
-export default function LinkPreview(preview: LinkPreview) {
+export function LinkPreview({ favicon, title }: LinkPreviewData) {
     return (
         <div className="flex items-center gap-2">
-            {preview.favicon && (
-                <div className="relative w-5 h-5">
+            {favicon && (
+                <div className="relative h-5 w-5">
                     <Image
-                        src={preview.favicon}
+                        src={favicon}
                         alt=""
                         fill
                         sizes="20px"
@@ -20,7 +16,7 @@ export default function LinkPreview(preview: LinkPreview) {
                 </div>
             )}
 
-            <h3 className="font-medium text-sm">{preview.title}</h3>
+            <h3 className="text-sm font-medium">{title}</h3>
         </div>
     );
 }

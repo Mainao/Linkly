@@ -5,43 +5,66 @@ import { useRef } from "react";
 
 type AvatarUploaderProps = {
     avatarUrl: string | null;
-    onUpload: (file: File) => void;
+    uploading: boolean;
+    onUpload: (file: File) => Promise<void>;
 };
 
-export default function AvatarUploader({
+export function AvatarUploader({
     avatarUrl,
+    uploading,
     onUpload,
 }: AvatarUploaderProps) {
     const fileInputRef = useRef<HTMLInputElement>(null);
 
+    const handleChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
+        const file = e.target.files?.[0];
+        if (!file) return;
+
+        // basic validation
+        if (!file.type.startsWith("image/")) {
+            alert("Please select an image file");
+            return;
+        }
+
+        await onUpload(file);
+
+        // allow re-uploading same file
+        e.target.value = "";
+    };
+
     return (
         <>
-            <div
-                className="relative h-16 w-16 rounded-full bg-gray-200 overflow-hidden cursor-pointer flex items-center justify-center"
+            <button
+                type="button"
+                aria-label="Upload profile picture"
                 onClick={() => fileInputRef.current?.click()}
+                disabled={uploading}
+                className="relative h-16 w-16 rounded-full overflow-hidden
+                           bg-gray-200 flex items-center justify-center
+                           focus:outline-none focus:ring-2 focus:ring-offset-2
+                           disabled:opacity-50"
             >
                 {avatarUrl ? (
                     <Image
                         src={avatarUrl}
-                        alt="Avatar"
+                        alt="Profile avatar"
                         fill
                         sizes="64px"
                         className="object-cover"
                     />
                 ) : (
-                    <span className="text-gray-500 text-sm">Upload</span>
+                    <span className="text-xs text-gray-500">
+                        {uploading ? "Uploading..." : "Upload"}
+                    </span>
                 )}
-            </div>
+            </button>
 
             <input
                 ref={fileInputRef}
                 type="file"
                 accept="image/*"
                 hidden
-                onChange={(e) => {
-                    const file = e.target.files?.[0];
-                    if (file) onUpload(file);
-                }}
+                onChange={handleChange}
             />
         </>
     );

@@ -10,7 +10,7 @@ type LinkPreview = {
 };
 
 export function useLinkPreview(url: string | undefined) {
-    const [preview, setPreview] = useState<LinkPreview>();
+    const [preview, setPreview] = useState<LinkPreview | null>();
     const [loading, setLoading] = useState(false);
 
     useEffect(() => {

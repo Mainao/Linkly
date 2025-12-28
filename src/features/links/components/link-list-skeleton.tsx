@@ -1,6 +1,10 @@
 "use client";
 
-export default function LinkListSkeleton({ count = 5 }: { count?: number }) {
+interface LinkListSkeletonProps {
+    count?: number;
+}
+
+export function LinkListSkeleton({ count = 5 }: LinkListSkeletonProps) {
     return (
         <div role="status" className="space-y-3 animate-pulse">
             {Array.from({ length: count }).map((_, i) => (
@@ -9,11 +13,11 @@ export default function LinkListSkeleton({ count = 5 }: { count?: number }) {
                     className="flex items-center justify-between rounded-lg border border-gray-200 bg-white px-4 py-4 shadow-sm"
                 >
                     <div className="space-y-2">
-                        <div className="h-3 bg-gray-300 rounded-full w-28" />
-                        <div className="h-2 bg-gray-200 rounded-full w-40" />
+                        <div className="h-3 w-28 rounded-full bg-gray-300" />
+                        <div className="h-2 w-40 rounded-full bg-gray-200" />
                     </div>
 
-                    <div className="h-3 bg-gray-300 rounded-full w-12" />
+                    <div className="h-3 w-12 rounded-full bg-gray-300" />
                 </div>
             ))}
 

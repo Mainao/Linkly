@@ -1,13 +1,13 @@
 "use client";
 
 import { useCallback, useEffect, useState } from "react";
-import { createClient } from "@/lib/supabase/client";
 import {
     fetchLinks,
     insertLink,
     deleteLink as deleteLinkApi,
-} from "../api/links";
-import { subscribeToUserLinks } from "../api/links";
+    subscribeToUserLinks,
+} from "../services/links-service";
+import { createClient } from "@/lib/supabase/client";
 
 type Link = {
     id: string;
@@ -32,7 +32,11 @@ export function useLinks() {
     }, []);
 
     useEffect(() => {
-        let channel: ReturnType<typeof supabase.channel>;
+        loadLinks();
+    }, [loadLinks]);
+
+    useEffect(() => {
+        let channel: ReturnType<typeof subscribeToUserLinks>;
 
         async function setupRealtime() {
             const {
@@ -41,7 +45,7 @@ export function useLinks() {
 
             if (!user) return;
 
-            channel = subscribeToUserLinks(supabase, user.id, loadLinks);
+            channel = subscribeToUserLinks(user.id, loadLinks);
         }
 
         setupRealtime();
@@ -54,20 +58,21 @@ export function useLinks() {
     }, [supabase, loadLinks]);
 
     const addLink = useCallback(
-        async (title: string | undefined, url: string) => {
-            await insertLink({ title, url });
+        async (url: string, title?: string) => {
+            await insertLink({ url, title });
+            await loadLinks();
         },
-        []
+        [loadLinks]
     );
 
     const deleteLink = useCallback(async (id: string) => {
         await deleteLinkApi(id);
+        setLinks((prev) => prev.filter((l) => l.id !== id));
     }, []);
 
     return {
         links,
         loading,
-        loadLinks,
         addLink,
         deleteLink,
     };

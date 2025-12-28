@@ -1,6 +1,6 @@
 import { Circle } from "lucide-react";
 
-export default function LoadingEllipsis() {
+export function LoadingEllipsis() {
     return (
         <div
             className="loading-ellipsis flex items-center justify-center space-x-2"

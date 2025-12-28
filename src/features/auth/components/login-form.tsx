@@ -2,7 +2,7 @@
 import { signinWithGoogle } from "@/lib/actions";
 import Link from "next/link";
 
-const LoginForm = () => {
+export function LoginForm() {
     return (
         <div className="min-h-dvh bg-linear-to-b from-white to-gray-50 flex flex-col items-center justify-center px-4 py-16 sm:px-6 lg:px-8">
             <h1 className="mb-10 text-2xl font-semibold tracking-tight text-center text-gray-900">
@@ -50,6 +50,4 @@ const LoginForm = () => {
             </form>
         </div>
     );
-};
-
-export default LoginForm;
+}

@@ -1,4 +1,4 @@
-import { LogoutForm } from "../logout-form";
+import { LogoutForm } from "@/features/auth";
 
 export default function Header() {
     return (
