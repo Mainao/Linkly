@@ -1,27 +1,9 @@
 import { createClient } from "@/lib/supabase/client";
+
 import { ProfileRow } from "../types";
 
 const supabase = createClient();
 
-/**
- * Get currently authenticated user
- */
-export async function getCurrentUser() {
-    const {
-        data: { user },
-        error,
-    } = await supabase.auth.getUser();
-
-    if (error || !user) {
-        throw new Error("User not authenticated");
-    }
-
-    return user;
-}
-
-/**
- * Fetch profile by user id
- */
 export async function getProfile(userId: string): Promise<ProfileRow> {
     const { data, error } = await supabase
         .from("profiles")
@@ -36,9 +18,6 @@ export async function getProfile(userId: string): Promise<ProfileRow> {
     return data;
 }
 
-/**
- * Upload avatar image and update profile
- */
 export async function uploadAvatar(
     userId: string,
     file: File
@@ -56,7 +35,6 @@ export async function uploadAvatar(
 
     const { data } = supabase.storage.from("avatars").getPublicUrl(filePath);
 
-    // Cache busting
     const publicUrl = `${data.publicUrl}?t=${Date.now()}`;
 
     const { error: updateError } = await supabase
@@ -71,9 +49,6 @@ export async function uploadAvatar(
     return publicUrl;
 }
 
-/**
- * Update username
- */
 export async function updateUsername(userId: string, username: string) {
     const { error } = await supabase
         .from("profiles")

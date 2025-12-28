@@ -4,12 +4,12 @@ import { useState } from "react";
 
 import { useLinkPreview } from "../hooks/use-link-preview";
 import { useLinks } from "../hooks/use-links";
-import { LinkInput } from "./link-input";
-import { LinkPreviewSkeleton } from "./link-preview-skeleton";
 import { LinkError } from "./link-error";
-import { LinkPreview } from "./link-preview";
-import { LinkListSkeleton } from "./link-list-skeleton";
+import { LinkInput } from "./link-input";
 import { LinkList } from "./link-list";
+import { LinkListSkeleton } from "./link-list-skeleton";
+import { LinkPreview } from "./link-preview";
+import { LinkPreviewSkeleton } from "./link-preview-skeleton";
 
 export function LinksSection() {
     const [url, setUrl] = useState("");

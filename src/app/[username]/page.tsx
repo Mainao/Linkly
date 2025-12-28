@@ -1,6 +1,7 @@
 import Image from "next/image";
-import { createClient } from "@/lib/supabase/server";
 import { notFound } from "next/navigation";
+
+import { createClient } from "@/lib/supabase/server";
 
 type PageProps = {
     params: Promise<{

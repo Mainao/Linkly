@@ -1,6 +1,6 @@
-import Sidebar from "@/components/layout/Sidebar";
 import Header from "@/components/layout/Header";
 import PageContainer from "@/components/layout/PageContainer";
+import Sidebar from "@/components/layout/Sidebar";
 
 export default async function AccountLayout({
     children,

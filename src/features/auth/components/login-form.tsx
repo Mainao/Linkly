@@ -1,6 +1,7 @@
 "use client";
-import { signinWithGoogle } from "@/lib/actions";
 import Link from "next/link";
+
+import { signinWithGoogle } from "@/lib/actions";
 
 export function LoginForm() {
     return (

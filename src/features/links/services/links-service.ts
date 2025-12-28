@@ -1,8 +1,8 @@
+import { getCurrentUser } from "@/lib/auth/auth-service";
 import { createClient } from "@/lib/supabase/client";
 import { normalizeUrl } from "@/lib/utils";
 
 import type { LinkRow } from "../types";
-import { getCurrentUser } from "@/features/profile";
 
 const supabase = createClient();
 

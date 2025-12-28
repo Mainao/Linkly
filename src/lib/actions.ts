@@ -1,8 +1,10 @@
 "use server";
 
-import { createClient } from "@/lib/supabase/server";
 import { redirect } from "next/navigation";
+
 import type { Provider } from "@supabase/auth-js";
+
+import { createClient } from "@/lib/supabase/server";
 
 const signInWith = (provider: Provider) => async (formData?: FormData) => {
     const supabase = await createClient();
@@ -15,9 +17,7 @@ const signInWith = (provider: Provider) => async (formData?: FormData) => {
         callbackUrl += `?username=${encodeURIComponent(username)}`;
     }
 
-    console.log("👉 callbackUrl=", callbackUrl);
-
-    const { data, error } = await supabase.auth.signInWithOAuth({
+    const { data } = await supabase.auth.signInWithOAuth({
         provider,
         options: { redirectTo: callbackUrl },
     });

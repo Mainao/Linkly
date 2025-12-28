@@ -1,11 +1,13 @@
 "use client";
 
 import { useCallback, useEffect, useState } from "react";
+
+import { getCurrentUser } from "@/lib/auth/auth-service";
+
 import {
-    getCurrentUser,
     getProfile,
-    uploadAvatar,
     updateUsername,
+    uploadAvatar,
 } from "../services/profile-service";
 
 type Profile = {

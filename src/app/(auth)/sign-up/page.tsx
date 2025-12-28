@@ -1,4 +1,5 @@
 import { redirect } from "next/navigation";
+
 import { SignupForm } from "@/features/auth";
 import { createClient } from "@/lib/supabase/server";
 

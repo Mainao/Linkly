@@ -2,9 +2,11 @@
 
 import { useState } from "react";
 import Link from "next/link";
+
 import { signinWithGoogle } from "@/lib/actions";
-import { UsernameInput } from "./username-input";
+
 import { LoadingEllipsis } from "./loading-ellipsis";
+import { UsernameInput } from "./username-input";
 
 export function SignupForm() {
     const [username, setUsername] = useState("");
@@ -21,7 +23,7 @@ export function SignupForm() {
                 window.location.origin
             }${pathname}?${query.toString()}`;
             window.history.pushState({}, "", newUrl);
-        } catch (e) {
+        } catch {
             window.location.href = `/sign-up?username=${encodeURIComponent(
                 username
             )}`;

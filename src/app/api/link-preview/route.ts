@@ -1,4 +1,5 @@
 import { NextResponse } from "next/server";
+
 import mql from "@microlink/mql";
 
 export async function POST(req: Request) {
@@ -20,7 +21,7 @@ export async function POST(req: Request) {
             favicon: data.logo?.url ?? null,
             image: data.image?.url ?? null,
         });
-    } catch (error) {
+    } catch {
         return NextResponse.json(
             { error: "Failed to fetch link preview" },
             { status: 500 }

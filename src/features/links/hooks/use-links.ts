@@ -1,13 +1,15 @@
 "use client";
 
 import { useCallback, useEffect, useState } from "react";
+
+import { createClient } from "@/lib/supabase/client";
+
 import {
+    deleteLink as deleteLinkApi,
     fetchLinks,
     insertLink,
-    deleteLink as deleteLinkApi,
     subscribeToUserLinks,
 } from "../services/links-service";
-import { createClient } from "@/lib/supabase/client";
 
 type Link = {
     id: string;

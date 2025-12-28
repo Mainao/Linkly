@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+
 import { fetchLinkPreview } from "@/lib/link-preview";
 import { normalizeUrl } from "@/lib/utils";
 

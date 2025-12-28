@@ -1,8 +1,8 @@
 "use client";
 
+import { useProfile } from "../hooks/use-profile";
 import { AvatarUploader } from "./avatar-uploader";
 import { UsernameDisplay } from "./username-display";
-import { useProfile } from "../hooks/use-profile";
 
 export function ProfileSection() {
     const { avatarUrl, username, uploading, uploadAvatar } = useProfile();

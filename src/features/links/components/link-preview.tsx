@@ -1,4 +1,5 @@
 import Image from "next/image";
+
 import type { LinkPreviewData } from "../types";
 
 export function LinkPreview({ favicon, title }: LinkPreviewData) {
