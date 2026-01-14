@@ -3,9 +3,11 @@
 import { useState } from "react";
 import Link from "next/link";
 
+import { Sparkles } from "lucide-react";
+
+import Card from "@/components/ui/Card";
 import { signinWithGoogle } from "@/lib/actions";
 
-import { LoadingEllipsis } from "./loading-ellipsis";
 import { UsernameInput } from "./username-input";
 
 export function SignupForm() {
@@ -31,12 +33,20 @@ export function SignupForm() {
     };
 
     return (
-        <div className="min-h-dvh bg-linear-to-b from-white to-gray-50 flex flex-col space-y-4 items-center justify-center px-4 py-16 sm:px-6 lg:px-8">
-            <h1 className="mb-10 text-2xl font-semibold tracking-tight text-center text-gray-900">
-                Linkly
-            </h1>
+        <Card className="p-10 flex flex-col items-center text-center space-y-8">
+            <div className="w-12 h-12 bg-indigo-600 rounded-xl flex items-center justify-center shadow-lg shadow-indigo-500/20">
+                <Sparkles size={24} className="text-white" />
+            </div>
+            <div className="space-y-2">
+                <h1 className="text-2xl font-semibold tracking-tight">
+                    Linkly
+                </h1>
+                <p className="text-neutral-500 text-sm font-light">
+                    Get Started
+                </p>
+            </div>
             {!nextClicked && (
-                <div className="sm:mx-auto sm:w-full sm:max-w-md">
+                <div className="w-full space-y-6 mb-8">
                     <UsernameInput
                         username={username}
                         setUsername={setUsername}
@@ -48,10 +58,10 @@ export function SignupForm() {
 
                     <button
                         onClick={handleNext}
-                        className="mt-6 h-10 w-full rounded-md border border-transparent bg-indigo-600 px-4 py-2 text-sm font-medium text-white cursor-pointer hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 dark:bg-indigo-700 dark:border-transparent dark:hover:bg-indigo-600 dark:focus:ring-indigo-400 dark:focus:ring-offset-2 disabled:bg-gray-400 disabled:pointer-events-none"
+                        className="w-full flex items-center justify-center gap-3 px-6 py-3 bg-white border border-neutral-200 rounded-full font-medium text-sm hover:bg-neutral-50 hover:border-neutral-300 transition-all shadow-sm active:scale-[0.98]"
                         disabled={loading || !username || !available}
                     >
-                        {loading ? <LoadingEllipsis /> : "Next"}
+                        Next
                     </button>
                 </div>
             )}
@@ -62,7 +72,7 @@ export function SignupForm() {
                         value={username}
                         className="hidden"
                     />
-                    <button className="w-full max-w-sm border border-gray-300 rounded-lg p-2 flex items-center justify-center gap-3 bg-white cursor-pointer hover:bg-gray-50 transition">
+                    <button className="w-full flex items-center justify-center gap-3 px-6 py-3 bg-white border border-neutral-200 rounded-full font-medium text-sm hover:bg-neutral-50 hover:border-neutral-300 transition-all shadow-sm active:scale-[0.98]">
                         <svg className="w-5 h-5" viewBox="0 0 24 24">
                             <path
                                 fill="#4285F4"
@@ -87,7 +97,7 @@ export function SignupForm() {
                     </button>
                 </form>
             )}
-            <div className="text-md-normal mt-6 text-center text-gray-700">
+            <div className="text-neutral-500 text-sm font-light">
                 <div>
                     Already have an account?{" "}
                     <Link
@@ -99,6 +109,6 @@ export function SignupForm() {
                     </Link>
                 </div>
             </div>
-        </div>
+        </Card>
     );
 }
