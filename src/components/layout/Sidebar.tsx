@@ -2,6 +2,7 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 
+import { LogoutForm } from "@/features/auth";
 import { cn } from "@/lib/utils";
 
 export default function Sidebar() {
@@ -13,23 +14,38 @@ export default function Sidebar() {
     ];
 
     return (
-        <aside className="w-60 bg-gray-50 border-r border-r-gray-200 h-screen flex flex-col p-4">
-            <h1 className="text-xl font-semibold mb-6 ml-3.5">Linkly</h1>
-            <nav className="space-y-2">
+        <aside className="w-60 md:w-64 p-6 border-b md:border-b-0 md:border-r border-black/5 flex flex-col shrink-0 z-20">
+            <div className="flex items-center gap-3 mb-12">
+                <div className="w-8 h-8 bg-indigo-600 rounded-lg flex items-center justify-center">
+                    <span className="text-white font-bold text-xs">LB</span>
+                </div>
+                <span className="text-lg font-semibold tracking-tight">
+                    Linkly
+                </span>
+            </div>
+            <nav className="flex flex-col flex-1 space-y-1">
                 {menuItems.map((item) => (
                     <Link
                         key={item.name}
                         href={item.href}
                         className={cn(
-                            "block rounded-lg px-3 py-2 text-sm font-medium transition-colors duration-300 ease-in hover:bg-gray-100",
+                            "w-full flex items-center gap-3 p-3 rounded-xl text-sm font-medium transition-all",
                             pathname === item.href
-                                ? "bg-gray-100 text-black"
-                                : "text-gray-600"
+                                ? "bg-black/5 text-black"
+                                : "text-neutral-500 hover:text-black hover:bg-black/5"
                         )}
                     >
                         <div className="flex gap-2">{item.name}</div>
                     </Link>
                 ))}
+                <div className="mt-auto">
+                    <LogoutForm
+                        className={cn(
+                            "w-full flex items-center gap-3 p-3 rounded-xl text-sm font-medium transition-all",
+                            "text-neutral-500 hover:text-black hover:bg-black/5"
+                        )}
+                    />
+                </div>
             </nav>
         </aside>
     );
