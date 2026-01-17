@@ -2,6 +2,8 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 
+import { Sparkles } from "lucide-react";
+
 import { LogoutForm } from "@/features/auth";
 import { cn } from "@/lib/utils";
 
@@ -17,7 +19,7 @@ export default function Sidebar() {
         <aside className="w-60 md:w-64 p-6 border-b md:border-b-0 md:border-r border-black/5 flex flex-col shrink-0 z-20">
             <div className="flex items-center gap-3 mb-12">
                 <div className="w-8 h-8 bg-indigo-600 rounded-lg flex items-center justify-center">
-                    <span className="text-white font-bold text-xs">LB</span>
+                    <Sparkles size={24} className="text-white" />
                 </div>
                 <span className="text-lg font-semibold tracking-tight">
                     Linkly
