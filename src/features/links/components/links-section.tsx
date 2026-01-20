@@ -29,9 +29,18 @@ export function LinksSection() {
     };
 
     return (
-        <section className="p-6">
-            <h2 className="text-lg font-semibold">Links</h2>
-            <div className="relative space-y-4 mt-4">
+        <>
+            <header className="sticky top-0 p-6 md:p-12 pb-6 flex items-center justify-between z-10 backdrop-blur-md">
+                <div>
+                    <h2 className="text-3xl font-extralight tracking-tight capitalize">
+                        links
+                    </h2>
+                    <p className="text-neutral-500 text-sm font-light mt-1">
+                        Real-time page editor
+                    </p>
+                </div>
+            </header>
+            <div className="relative space-y-4">
                 <LinkInput
                     value={url}
                     onChange={(value) => {
@@ -41,7 +50,6 @@ export function LinksSection() {
                     onFocus={() => setIsOpen(true)}
                 />
 
-                {/* Preview dropdown */}
                 {isOpen && url && (
                     <div className="absolute z-10 mt-4 w-full rounded-md border bg-white shadow">
                         {previewLoading && !preview && <LinkPreviewSkeleton />}
@@ -60,7 +68,6 @@ export function LinksSection() {
                     </div>
                 )}
 
-                {/* Links list */}
                 {linksLoading && <LinkListSkeleton />}
 
                 {!linksLoading && links.length === 0 && <LinkListSkeleton />}
@@ -69,6 +76,6 @@ export function LinksSection() {
                     <LinkList links={links} onDelete={deleteLink} />
                 )}
             </div>
-        </section>
+        </>
     );
 }

@@ -1,5 +1,3 @@
-import Header from "@/components/layout/Header";
-import PageContainer from "@/components/layout/PageContainer";
 import Sidebar from "@/components/layout/Sidebar";
 
 export default async function AccountLayout({
@@ -8,11 +6,10 @@ export default async function AccountLayout({
     children: React.ReactNode;
 }) {
     return (
-        <div className="flex h-screen">
-            <Sidebar />
-            <div className="flex flex-col flex-1">
-                <Header />
-                <PageContainer>{children}</PageContainer>
+        <div className="min-h-screen transition-colors duration-500 text-neutral-900">
+            <div className="h-screen flex flex-col md:flex-row overflow-hidden">
+                <Sidebar />
+                <div className="flex flex-1">{children}</div>
             </div>
         </div>
     );
