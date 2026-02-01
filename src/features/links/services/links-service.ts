@@ -4,9 +4,8 @@ import { normalizeUrl } from "@/lib/utils";
 
 import type { LinkRow } from "../types";
 
-const supabase = createClient();
-
 export async function fetchLinks(): Promise<LinkRow[]> {
+    const supabase = createClient();
     const user = await getCurrentUser();
 
     const { data, error } = await supabase
@@ -24,6 +23,7 @@ export async function insertLink(params: {
     title?: string;
     url: string;
 }): Promise<void> {
+    const supabase = createClient();
     const user = await getCurrentUser();
 
     const { error } = await supabase.from("links").insert({
@@ -36,6 +36,7 @@ export async function insertLink(params: {
 }
 
 export async function deleteLink(linkId: string): Promise<void> {
+    const supabase = createClient(); // Create here
     const user = await getCurrentUser();
 
     const { error } = await supabase
@@ -48,6 +49,7 @@ export async function deleteLink(linkId: string): Promise<void> {
 }
 
 export function subscribeToUserLinks(userId: string, onChange: () => void) {
+    const supabase = createClient(); // Create here
     const channel = supabase
         .channel(`links:${userId}`)
         .on(
@@ -58,7 +60,7 @@ export function subscribeToUserLinks(userId: string, onChange: () => void) {
                 table: "links",
                 filter: `user_id=eq.${userId}`,
             },
-            onChange
+            onChange,
         )
         .subscribe();
 
