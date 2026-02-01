@@ -60,7 +60,7 @@ export function subscribeToUserLinks(userId: string, onChange: () => void) {
                 table: "links",
                 filter: `user_id=eq.${userId}`,
             },
-            onChange,
+            onChange
         )
         .subscribe();
 
