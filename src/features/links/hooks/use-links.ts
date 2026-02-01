@@ -18,8 +18,7 @@ type Link = {
 };
 
 export function useLinks() {
-    const supabase = createClient();
-
+    // Move client creation inside useEffect/callbacks where it's needed
     const [links, setLinks] = useState<Link[]>([]);
     const [loading, setLoading] = useState(false);
 
@@ -38,6 +37,7 @@ export function useLinks() {
     }, [loadLinks]);
 
     useEffect(() => {
+        const supabase = createClient(); // Create client here instead
         let channel: ReturnType<typeof subscribeToUserLinks>;
 
         async function setupRealtime() {
@@ -57,14 +57,14 @@ export function useLinks() {
                 supabase.removeChannel(channel);
             }
         };
-    }, [supabase, loadLinks]);
+    }, [loadLinks]); // Remove supabase from dependencies
 
     const addLink = useCallback(
         async (url: string, title?: string) => {
             await insertLink({ url, title });
             await loadLinks();
         },
-        [loadLinks]
+        [loadLinks],
     );
 
     const deleteLink = useCallback(async (id: string) => {
