@@ -7,7 +7,7 @@ type PublicLinksListProps = {
 
 export function PublicLinksList({ links }: PublicLinksListProps) {
     return (
-        <div className="mt-8 space-y-4">
+        <div className="mt-8 space-y-4 text-[14px]">
             {links.map((link) => (
                 <LinkButton key={link.id} title={link.title} url={link.url} />
             ))}

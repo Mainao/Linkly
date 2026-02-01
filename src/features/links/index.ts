@@ -5,6 +5,7 @@ export { LinkListSkeleton } from "./components/link-list-skeleton";
 export { LinkPreview } from "./components/link-preview";
 export { LinkPreviewSkeleton } from "./components/link-preview-skeleton";
 export { LinksSection } from "./components/links-section";
+export { PublicLinksList } from "./components/public-links-list";
 export {
     deleteLink,
     fetchLinks,

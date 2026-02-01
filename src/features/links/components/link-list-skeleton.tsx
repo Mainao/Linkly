@@ -6,7 +6,10 @@ interface LinkListSkeletonProps {
 
 export function LinkListSkeleton({ count = 5 }: LinkListSkeletonProps) {
     return (
-        <div role="status" className="space-y-3 animate-pulse">
+        <div
+            role="status"
+            className="space-y-4 px-6 md:px-12 pb-24 max-w-2xl animate-pulse"
+        >
             {Array.from({ length: count }).map((_, i) => (
                 <div
                     key={i}

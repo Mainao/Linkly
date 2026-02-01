@@ -1,10 +1,9 @@
 import { notFound } from "next/navigation";
 
-import { getPublicProfileByUsername } from "@/features/profile/services/profile-public-service";
-import { getPublicLinksByUserId } from "@/features/links/services/links-public-service";
-
-import { PublicProfileHeader } from "@/features/profile/components/public-profile-header";
 import { PublicLinksList } from "@/features/links/components/public-links-list";
+import { getPublicLinksByUserId } from "@/features/links/services/links-public-service";
+import { PublicProfileHeader } from "@/features/profile/components/public-profile-header";
+import { getPublicProfileByUsername } from "@/features/profile/services/profile-public-service";
 
 type PageProps = {
     params: Promise<{
