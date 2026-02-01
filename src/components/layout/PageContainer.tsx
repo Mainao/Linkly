@@ -3,5 +3,9 @@ export default function PageContainer({
 }: {
     children: React.ReactNode;
 }) {
-    return <main className="flex-1 p-6 overflow-auto">{children}</main>;
+    return (
+        <main className="flex-1 overflow-y-auto bg-transparent relative flex flex-col">
+            {children}
+        </main>
+    );
 }

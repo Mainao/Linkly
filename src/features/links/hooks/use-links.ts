@@ -64,7 +64,7 @@ export function useLinks() {
             await insertLink({ url, title });
             await loadLinks();
         },
-        [loadLinks],
+        [loadLinks]
     );
 
     const deleteLink = useCallback(async (id: string) => {

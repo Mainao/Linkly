@@ -24,6 +24,7 @@ export function LinkList({ links, onDelete }: LinkListProps) {
                 <div
                     key={link.id}
                     className="flex items-center justify-between px-4 py-3 overflow-hidden backdrop-blur-xl border rounded-2xl transition-all duration-300 bg-white/40 border-black/5 text-neutral-900 shadow-sm p-4"
+                    draggable={true}
                 >
                     <div className="min-w-0">
                         <div className="truncate font-medium">
