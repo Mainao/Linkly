@@ -1,4 +1,3 @@
-"use client";
 import { LinksSection } from "@/features/links";
 import { ProfilePreviewContainer } from "@/features/profile";
 
